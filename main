@@ -1,0 +1,50 @@
+import 'package:buku_flutter/login_google_page.dart';
+import 'package:flutter/material.dart';
+import 'data.dart';
+import 'detail.dart';
+
+void main() => runApp(MyApp());
+
+// class Login extends StatelessWidget {
+//   // const Login({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Toko Buku',
+//       debugShowCheckedModeBanner: false,
+//       theme: ThemeData(
+//         primarySwatch: Colors.purple,
+//         platform: TargetPlatform.iOS,
+//       ),
+//       home: LoginGooglePage(),
+//     );
+//   }
+// }
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Toko Buku',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        platform: TargetPlatform.iOS,
+      ),
+      home: LoginGooglePage(),
+      onGenerateRoute: (settings) => generateRoute(settings),
+    );
+  }
+
+  generateRoute(RouteSettings settings) {
+    final path = settings.name.split('/');
+    final title = path[1];
+
+    Book book = books.firstWhere((it) => it.title == title);
+    return MaterialPageRoute(
+      settings: settings,
+      builder: (context) => Detail(book),
+    );
+  }
+}
